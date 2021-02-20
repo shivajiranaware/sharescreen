@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Share Desktop</title>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+  </body>
+  <script>
+    let canvas = document.getElementById("canvas");
+
+    // Request media
+    navigator.mediaDevices
+      .getDisplayMedia()
+      .then((stream) => {
+        // Grab frame from stream
+        let videoTracks = stream.getVideoTracks()[0];
+        let imageCapture = new ImageCapture(videoTracks);
+        imageCapture.grabFrame().then((bitmap) => {
+          // Stop sharing
+          videoTracks.stop();
+
+          // Draw the bitmap to canvas
+          canvas.width = bitmap.width;
+          canvas.height = bitmap.height;
+          canvas.getContext("2d").drawImage(bitmap, 0, 0);
+
+          // Grab blob from canvas
+          canvas.toBlob((blob) => {
+            // Do things with blob here
+            console.log("output blob:", blob);
+          });
+        });
+      })
+      .catch((e) => console.log(e));
+  </script>
+</html>

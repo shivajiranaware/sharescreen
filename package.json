@@ -1,0 +1,16 @@
+{
+  "name": "sharescreen",
+  "version": "1.0.0",
+  "description": "Share current screen with options like complete screen, specific window etc",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "share screen",
+    "share window",
+    "share desktop"
+  ],
+  "author": "Shivaji Ranaware",
+  "license": "ISC"
+}
